@@ -73,7 +73,7 @@ element-icon {
 }
 
 element-text {
-    highlight: none;
+    highlight: bold;
     padding: 0px 0px 0px 8px;
     text-color: @nord06;
 }
