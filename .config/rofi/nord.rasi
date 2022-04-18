@@ -3,25 +3,27 @@
     nord01: #3b4252;
     nord02: #434c5e;
     nord03: #4c566a;
+
     nord04: #d8dee9;
     nord05: #e5e9f0;
     nord06: #eceff4;
+
     nord07: #8fbcbb;
     nord08: #88c0d0;
     nord09: #81a1c1;
     nord10: #5e81ac;
+
     nord11: #bf616a;
     nord12: #d08770;
     nord13: #ebcb8b;
     nord14: #a3be8c;
     nord15: #b48ead;
-    
+
     nord06-50: #eceff480;
 
     background-color: transparent;
     font: "JetBrains Mono Medium 10";
     spacing: 0px;
-    text-color: @nord06;
 }
 
 window {
@@ -32,6 +34,11 @@ window {
     location: center;
     width: 516px;
     y-offset: -177px;
+}
+
+inputbar {
+    padding: 7px;
+    spacing: 7px;
 }
 
 prompt {
@@ -45,13 +52,9 @@ prompt {
 
 entry {
     color: @nord06-50;
+    cursor: text;
     padding: 0px 0px 0px -1px;
     placeholder: "search applications";
-}
-
-inputbar {
-    padding: 7px;
-    spacing: 7px;
 }
 
 listview {

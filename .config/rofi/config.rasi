@@ -1,6 +1,7 @@
 @theme "nord"
 
 configuration {
+    modi: "drun";
     show-icons: true;
     display-drun: "APPLICATIONS";
     kb-cancel: "super+x";
