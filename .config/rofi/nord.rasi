@@ -61,6 +61,7 @@ listview {
     columns: 1;
     fixed-height: false;
     lines: 10;
+    require-input: true;
 }
 
 element {

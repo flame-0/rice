@@ -3,6 +3,7 @@
 configuration {
     modi: "drun";
     show-icons: true;
+    click-to-exit: true;
     display-drun: "APPLICATIONS";
     kb-cancel: "super+x";
 }
