@@ -7,7 +7,7 @@
     <img src="documentation/asset/rice-dark.svg">
   </a>
 
-  <p><i>flame's well-chilled rice.</i></p>
+  <p><i>flame's well-chilled rice.<sup>work-in-progress</sup></i></p>
 
   <img src="documentation/asset/concept.png">
 </div>
