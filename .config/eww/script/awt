@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+active_window_title="$(xdotool getactivewindow getwindowname 2> /dev/null)"
+
+if [[ "${#active_window_title}" -gt 50 ]]; then
+    truncated=$(echo "$active_window_title" | cut -c -50)
+    echo "${truncated}..."
+else
+    echo "$active_window_title"
+fi

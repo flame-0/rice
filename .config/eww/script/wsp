@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+contains() {
+    for e in $1; do
+        [ "$e" -eq "$2" ] && echo 1 && return
+    done
+    echo 0
+}
+
+print_workspaces() {
+    buf=""
+    desktops=$(bspc query -D --names)
+    focused_desktop=$(bspc query -D -d focused --names)
+    occupied_desktops=$(bspc query -D -d .occupied --names)
+
+    for d in $desktops; do
+        if [ "$(contains "$focused_desktop" "$d")" -eq 1 ]; then
+            ws=$d
+            icon="./widget/bar/asset/ws-f.svg"
+        elif [ "$(contains "$occupied_desktops" "$d")" -eq 1 ]; then
+            ws=$d
+            icon="./widget/bar/asset/ws-o.svg"
+        else
+            ws=$d
+            icon="./widget/bar/asset/ws-e.svg"
+        fi
+
+        buf="$buf (eventbox :cursor \"hand\" (button :onclick \"bspc desktop -f $ws\" (image :path \"$icon\")))"
+    done
+
+    echo "(box :spacing 20 :class \"workspace\" :halign \"center\" :valign \"center\" :vexpand true :hexpand true $buf)"
+}
+
+print_workspaces
+bspc subscribe desktop node_transfer | while read -r _; do
+    print_workspaces
+done

@@ -1,0 +1,205 @@
+(defvar amogus "./widget/bar/asset/amogus.svg")
+(defvar storage-image "./widget/bar/asset/storage.svg")
+(defvar ram-image "./widget/bar/asset/ram.svg")
+(defvar cpu-image "./widget/bar/asset/cpu.svg")
+(defvar volume-image "./widget/bar/asset/volume-100.svg")
+
+(defwidget bar []
+    (centerbox
+        (left)
+        (window-title)
+        (right)
+    )
+)
+
+
+(defwidget left []
+    (box
+        :class "left"
+        :space-evenly false
+        :halign "start"
+        (search)
+        (workspace)
+    )
+)
+
+(defwidget right []
+    (box
+        :class "right"
+        :space-evenly false
+        :halign "end"
+        (storage)
+        (ram)
+        (cpu)
+        (volume)
+        (time)
+    )
+)
+
+(defwidget search []
+    (box
+        :class "search"
+        (eventbox
+            :cursor "hand"
+            (button
+                :onclick "rofi -show drun"
+                :timeout "30000ms"
+                (image :path {amogus})
+            )
+        )
+    )
+)
+
+(deflisten workspace_listen
+    "./script/wsp"
+)
+
+(defwidget workspace []
+    (literal
+        :content workspace_listen
+    )
+)
+
+(defwidget window-title []
+    (box
+        :class "window-title"
+        :space-evenly false
+        :halign "center"
+        window-title
+    )
+)
+
+(defpoll window-title
+    :interval "0s"
+    "./script/awt"
+)
+
+(defwidget storage []
+    (eventbox
+        :tooltip "📦 ${round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}%" 
+        (box
+            :class "storage"
+            :space-evenly false
+            (image :path {storage-image})
+            (metric-default
+                :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
+                :onchange ""
+            )
+        )
+    )
+)
+
+(defwidget ram []
+    (eventbox
+        :tooltip "🐏 ${round(EWW_RAM.used_mem_perc, 0)}%" 
+        (box
+            :class "ram"
+            :space-evenly false
+            (image :path {ram-image})
+            (metric-default
+                :value {round(EWW_RAM.used_mem_perc, 0)}
+                :onchange ""
+            )
+        )
+    )
+)
+
+(defwidget cpu []
+    (eventbox
+        :tooltip "⚡ ${round(EWW_CPU.avg, 0)}%" 
+        (box
+            :class "cpu"
+            :space-evenly false
+            (image :path {cpu-image})
+            (metric-default
+                :value {round(EWW_CPU.avg, 0)}
+                :onchange ""
+            )
+        )
+    )
+)
+
+(defwidget metric-default [value onchange]
+    (box
+        :orientation "h"
+        :class "metric-default"
+        :space-evenly false
+        (box :class "label")
+        (scale
+            :min 0
+            :max 101
+            :active {onchange != ""}
+            :value value
+            :onchange onchange
+        )
+    )
+)
+
+(defvar volume false)
+(defvar current-volume true)
+
+(defpoll volumepoll
+    :interval "1s"
+    "./script/vol"
+)
+
+(defwidget volume []
+    (eventbox
+        :tooltip "📢 ${volumepoll.content}%" 
+        :onhover "eww update volume=true && eww update current-volume=$(pamixer --get-volume)"
+        :onhoverlost "eww update volume=false"
+        (box
+            :class "volume"
+            :orientation "h" 
+            :space-evenly false 
+            (eventbox 
+                (button
+                    :class "volume-icon"
+                    :onclick `eww update volumepoll="$(./script/vol toggle)"` (image :path {volumepoll.icon})
+                )
+            )
+            (scale
+                :min 0
+                :max 101
+                :onchange `eww update volumepoll="$(./script/vol {})"`
+                :value "${volumepoll.content}"
+            )
+        )
+    )
+)
+
+(defpoll date
+    :interval "10s"
+    "date +'%A, %B %d, %Y'"
+)
+
+(defwidget time []
+    (box
+        :tooltip "📅 ${date}"
+        :class "time"
+        :space-evenly false
+        time
+    )
+)
+
+(defpoll time
+    :interval "0s"
+    "date '+%H:%M'"
+)
+
+(defwindow bar
+    :monitor 0
+    :geometry (
+        geometry
+        :width "100%"
+        :height "58px"
+        :anchor "top center"
+    )
+    :reserve (
+        struts
+        :distance "34px"
+        :side "top"
+    )
+    :windowtype "dock"
+    (bar)
+)
