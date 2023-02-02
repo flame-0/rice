@@ -1,0 +1,88 @@
+@use '../../color.scss' as color;
+
+tooltip {
+    font-family: "JetBrains Mono";
+    font-weight: bold;    
+    font-size: 14px;
+    color: color.$nord3;
+    background-color: color.$nord9;
+}
+
+.bar {
+    font-family: "JetBrains Mono";
+    font-weight: bold;    
+    font-size: 14px;
+    background: url('widget/bar/asset/bar.png');
+}
+
+.search, .time {
+    color: color.$nord3;
+    border-radius: 16px;
+    box-shadow: rgba(136, 192, 208, 0.25) 0px 4px 4px;
+}
+
+.search {
+    margin: 16px 26px 10px 26px;
+}
+
+.search :hover {
+    opacity: 0.75;
+}
+
+.search :active {
+    opacity: 0.5;
+}
+
+.workspace,
+.storage,
+.ram,
+.cpu,
+.volume,
+.window-title {
+    padding-bottom: 26px;
+}
+
+.workspace :hover {
+    opacity: 0.75;
+}
+
+.workspace :active {
+    opacity: 0.5;
+}
+
+.window-title {
+    color: color.$nord8;
+}
+
+.volume-icon {
+    margin-right: 10px;
+}
+
+scale trough highlight {
+    background-color: color.$nord9;
+    min-height: 6px;
+    border-radius: 3px;
+}
+
+scale trough {
+    background-color: color.$nord3;
+    border-radius: 8px;
+    min-height: 6px;
+    min-width: 100px;
+}
+
+.metric-default scale trough {
+    margin-left: 10px;
+    min-width: 50px;
+    margin-right: 20px;
+}
+.volume scale trough {
+    min-width: 100px;
+    margin-right: 26px;
+}
+
+.time {
+    background-color: color.$nord8;
+    padding: 0px 11px 0px 11px;
+    margin: 16px 26px 10px 0px;
+}

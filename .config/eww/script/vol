@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+case $1 in 
+    "*") command="" ;;
+    "up") command="--allow-boost -i 5" ;;
+    "down") command="--allow-boost -d 5" ;;
+    "toggle") command="-t" ;;
+    [0-9]*) 
+        int=$(printf '%.0f' $1)
+        command="--set-volume $int"
+        ;;
+esac
+
+[[ -n "$command" ]] && pamixer $command 
+mute=$(pamixer --get-mute)
+volume="$(pamixer --get-volume)"
+if [ "$mute" = "true" ]; then
+    icon="./widget/bar/asset/volume-mute.svg"
+else 
+    volume="$volume"
+    if [[ "$volume" -gt 100 ]]; then
+        icon="./widget/bar/asset/volume-100.svg"
+    elif [[ "$volume" -gt 66 ]]; then
+        icon="./widget/bar/asset/volume-100.svg"
+    elif [[ "$volume" -gt 33 ]]; then
+        icon="./widget/bar/asset/volume-66.svg"
+    elif [[ "$volume" -gt 0 ]]; then 
+        icon="./widget/bar/asset/volume-33.svg"
+    else 
+        icon="./widget/bar/asset/volume-mute.svg"
+    fi
+fi
+
+echo "{\"content\": \"$volume\", \"icon\": \"$icon\"}"
