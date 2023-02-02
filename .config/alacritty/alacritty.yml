@@ -1,0 +1,26 @@
+import:
+    - ~/.config/alacritty/nord.yml
+    - ~/.config/alacritty/font.yml
+
+env:
+    TERM: alacritty
+
+window:
+    padding:
+        x: 20
+        y: 20
+
+    dynamic_padding: true
+    dynamic_title: true
+
+    history: 10000
+    multiplier: 3
+
+cursor:
+    style:
+        shape: Block
+        blinking: On
+
+    unfocused_hollow: true
+
+live_config_reload: true
