@@ -15,7 +15,6 @@ window {
     border: 2px;
     location: center;
     width: 516px;
-    y-offset: -177px;
 }
 
 inputbar {
