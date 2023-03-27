@@ -1,0 +1,22 @@
+add_newline = false
+command_timeout = 5000
+
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[✗](bold red)"
+
+[custom.sudo]
+command = "echo -n '🚧'"
+format = "[$symbol$output]($style) "
+style = "bold fg:bright-red"
+when = "sudo -vn &>/dev/null"
+ignore_timeout = true
+
+[python]
+disabled = true
+
+[line_break]
+disabled = true
+
+[c]
+disabled = true
