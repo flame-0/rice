@@ -11,10 +11,11 @@ configuration {
 window {
     background-color: @nord00;
     border-color: @nord01;
-    border-radius: 6px;
+    border-radius: 8px;
     border: 2px;
-    location: center;
+    location: north;
     width: 516px;
+    y-offset: 361px;
 }
 
 inputbar {
@@ -50,7 +51,7 @@ element {
 }
 
 element selected {
-    background-color: @nord03;
+    background-color: @nord03-50;
 }
 
 element-icon {
@@ -62,3 +63,5 @@ element-text {
     padding: 0px 0px 0px 8px;
     text-color: @nord06;
 }
+
+

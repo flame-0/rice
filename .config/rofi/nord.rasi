@@ -19,6 +19,8 @@
     nord14: #a3be8c;
     nord15: #b48ead;
 
+    nord00-50: #2e344080;
+    nord03-50: #4c566a80;
     nord06-50: #eceff480;
 
     background-color: transparent;
